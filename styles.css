@@ -1,0 +1,22 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "OpenSauceOne", sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f3eeee;
+}
+
+app-card {
+  width: 400px;
+  height: 400px;
+}
+
+[status="fertile"] b {
+  font-size: 46px;
+}
+
+[status="not-fertile"] b {
+  font-size: 68px;
+}
