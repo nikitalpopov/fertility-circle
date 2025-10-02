@@ -1,3 +1,53 @@
+// HTML Template example
+const fertilityCircleTemplate = document.createElement('template');
+fertilityCircleTemplate.innerHTML = `
+  <style>
+    :host {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .content {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--circle-color, #2196F3);
+      cursor: pointer;
+    }
+
+    .content:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      border-radius: 50%;
+    }
+  </style>
+
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle
+      cx="100"
+      cy="100"
+      r="96.5"
+      stroke="var(--circle-color, #ff736f)"
+      stroke-width="7"
+      fill="white"
+    />
+  </svg>
+  <div class="content">
+    <slot></slot>
+  </div>
+`;
+
 class FertilityCircle extends HTMLElement {
   constructor() {
     super()
@@ -13,54 +63,19 @@ class FertilityCircle extends HTMLElement {
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if (oldValue !== newValue) {
-      this.render()
-    }
+    if (oldValue !== newValue) this.render()
   }
 
   render() {
     const status = this.getAttribute('status') || 'fertile'
     const color = status === 'fertile' ? '#ff736f' : '#a1c862'
 
-    this.shadowRoot.innerHTML = `
-      <style>
-        :host {
-          display: block;
-          width: 100%;
-          height: 100%;
-          position: relative;
-        }
-        svg {
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          pointer-events: none;
-        }
-        .content {
-          position: absolute;
-          height: 100%;
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: ${color};
-        }
-      </style>
+    this.shadowRoot.innerHTML = ''
 
-      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <circle
-          cx="100"
-          cy="100"
-          r="96.5"
-          stroke="${color}"
-          stroke-width="7"
-          fill="white"
-        />
-      </svg>
-      <div class="content">
-        <slot></slot>
-      </div>
-    `
+    const templateClone = fertilityCircleTemplate.content.cloneNode(true)
+    this.shadowRoot.appendChild(templateClone)
+
+    this.style.setProperty('--circle-color', color)
   }
 }
 
