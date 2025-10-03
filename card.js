@@ -15,12 +15,14 @@ class Card extends HTMLElement {
           display: block;
           margin: 16px;
         }
+
         .card {
           width: 100%;
           height: 100%;
           padding: 16px;
           border-radius: 4px;
           background-color: white;
+          box-sizing: border-box;
         }
       </style>
 
