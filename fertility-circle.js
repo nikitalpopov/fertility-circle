@@ -23,13 +23,7 @@ fertilityCircleTemplate.innerHTML = `
       display: flex;
       justify-content: center;
       align-items: center;
-      color: var(--circle-color, #2196F3);
-      cursor: pointer;
-    }
-
-    .content:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-      border-radius: 50%;
+      color: var(--circle-color, #ff736f);
     }
   </style>
 
